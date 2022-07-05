@@ -8,6 +8,31 @@
   display: flex;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 ul {
   list-style: none;
+  text-align: center;
+}
+
+li h2 {
+  margin: 5px 0px;
+  font-size: 16px;
+}
+
+.user-card {
+  text-align: center;
+  display: inline-grid;
+  border: gray solid 1px;
+  box-shadow: 3px 4px lightgray;
+  margin: 10px;
+}
+
+.user-img {
+  justify-self: center;
+  height: 120px;
+  width: auto;
 }
