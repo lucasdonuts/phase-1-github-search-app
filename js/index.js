@@ -7,23 +7,36 @@ document.addEventListener('DOMContentLoaded', () => {
   searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    while(userList.firstChild) {
+      userList.firstChild.remove()
+    }
+
     fetchSearchResults(e.target.search.value)
     .then(data => renderSearchResults(data.items))
 
     searchForm.reset();
   })
 
-  // Search function
+  // Fetch functions
   function fetchSearchResults(name) {
     return fetch(`https://api.github.com/search/users?q=${name}`)
-    .then(res => res.json())
+      .then(res => res.json())
   }
 
-  // Displaying search results
+  function fetchUserRepos(userLogin) {
+    return fetch(`https://api.github.com/users/${userLogin}/repos`)
+      .then(res => res.json())
+  }
+
+  // Render functions
   function renderSearchResults(results) {
     results.forEach((result) => {
       createUserCard(result);
     })
+  }
+
+  function renderUserRepos(repoArray) {
+    
   }
 
   function createUserCard(user) {
@@ -38,10 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
     img.src = user.avatar_url
     img.className = 'user-img'
     link.href = `https://www.github.com/${user.login}`
+    link.innerText = 'GitHub'
+    link.target = '_blank'
 
     userList.append(li)
-    li.append(link)
-    link.append(img, h2)
+    li.append(img, h2, link)
+
+    li.addEventListener('click', (e) => {
+      fetchUserRepos(user.login)
+      .then(data => renderUserRepos(data))
+    })
   }
 
 })

@@ -1,3 +1,7 @@
+body {
+  background-color: bisque;
+}
+
 #main {
   display: flex;
   flex-direction: column;
@@ -16,6 +20,14 @@ a {
 ul {
   list-style: none;
   text-align: center;
+}
+
+li {
+  background-color: white;
+}
+
+li:hover {
+  transform: scale(1.10);
 }
 
 li h2 {
