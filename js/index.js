@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.querySelector('#github-form');
   const userList = document.querySelector('#user-list')
+  const repoList = document.querySelector('#repos-list')
 
   searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -35,8 +36,28 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  function renderUserRepos(repoArray) {
-    
+  function renderRepo(repo) {
+    const owner = document.querySelector(`#${repo.owner.login}`)
+    const link = document.createElement('a')
+    const name = document.createElement('p')
+
+    console.log(repo)
+
+    // Clear search results, but keep selected user
+    while(userList.firstChild) {
+      userList.firstChild.remove()
+    }
+    userList.append(owner)
+
+    link.href = repo.html_url
+    link.target = '_blank'
+    link.className = 'repo-url'
+    name.className = 'repo-name'
+    name.textContent = repo.name
+
+    link.append(name)
+    repoList.append(link)
+    repoList.style.display = 'block'
   }
 
   function createUserCard(user) {
@@ -59,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     li.addEventListener('click', (e) => {
       fetchUserRepos(user.login)
-      .then(data => renderUserRepos(data))
+      .then(repos => repos.forEach(repo => renderRepo(repo)))
     })
   }
 
