@@ -18,6 +18,17 @@ a {
   font-size: 20;
 }
 
+.github {  
+  border: 2px black solid;
+  border-radius: 25px;
+}
+
+.github:hover {
+  border-color: white;
+  background-color: black;
+  color: white;
+}
+
 ul {
   list-style: none;
   text-align: center;
@@ -28,7 +39,8 @@ li {
 }
 
 li:hover {
-  transform: scale(1.10);
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 li h2 {
@@ -41,7 +53,7 @@ li h2 {
   display: inline-grid;
   border: gray solid 1px;
   box-shadow: 3px 4px lightgray;
-  margin: 10px;
+  margin: 0px;
 }
 
 .user-img {
@@ -52,7 +64,7 @@ li h2 {
 
 #repos-list {
   background: white;
-  padding: 10px;
+  padding: 0px 10px;
   display: none;
   text-align: left;
 }
